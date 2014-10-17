@@ -14,7 +14,7 @@ window.onload = function () {
         loadPlayers();
         fillChampDropdowns();
     });
-}
+};
 
 var defaultChampData;
 var topList;
@@ -111,7 +111,7 @@ function resetResults(){
 function shuffleArray(o){ //v1.0
     for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
     return o;
-};
+}
 
 
 function renderRoleLists() {
