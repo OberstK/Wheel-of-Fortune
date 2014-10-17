@@ -1,0 +1,21 @@
+.content{
+    margin: 20px;
+}
+
+.checkMod{
+    padding-right: 4px;
+}
+
+.roleList{
+    list-style-type: none;
+    padding-left:0;
+    text-align: center;
+}
+
+.full {
+    background: url('../img/akali_vs_baron_3.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}

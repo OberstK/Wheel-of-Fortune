@@ -1,0 +1,531 @@
+{
+    "champs": [
+        {
+            "name": "Aatrox",
+            "roles": ["Top", "Jungle"]
+        },
+        {
+            "name": "Ahri",
+            "roles": ["Mid"]
+        },
+        {
+            "name": "Akali",
+            "roles": ["Mid"],
+            "trollpicks": ["Top"]
+        },
+        {
+            "name": "Alistar",
+            "roles": ["Top", "Support"],
+            "trollpicks": ["Mid"]
+        },
+        {
+            "name": "Amumu",
+            "roles": ["Jungle"],
+            "trollpicks": ["Support", "Top"]
+        },
+        {
+            "name": "Anivia",
+            "roles": ["Mid"],
+            "trollpicks": ["Support"]
+        },
+        {
+            "name": "Annie",
+            "roles": ["Mid", "Support"]
+        },
+        {
+            "name": "Ashe",
+            "roles": ["ADC"]
+        },
+        {
+            "name": "Azir",
+            "roles": ["Mid"],
+            "trollpicks": ["Support", "Top"]
+        },
+        {
+            "name": "Blitzcrank",
+            "roles": ["Support"],
+            "trollpicks": ["Top"]
+        },
+        {
+            "name": "Brand",
+            "roles": ["Mid"]
+        },
+        {
+            "name": "Braum",
+            "roles": ["Support"]
+        },
+        {
+            "name": "Caitlyn",
+            "roles": ["ADC"]
+        },
+        {
+            "name": "Cassiopeia",
+            "roles": ["Mid"],
+            "trollpicks": ["Support"]
+        },
+        {
+            "name": "Cho'Gath",
+            "roles": ["Top", "Mid", "Jungle"],
+            "trollpicks": ["Support"]
+        },
+        {
+            "name": "Corki",
+            "roles": ["ADC"]
+        },
+        {
+            "name": "Darius",
+            "roles": ["Top"],
+            "trollpicks": ["Jungle"]
+        },
+        {
+            "name": "Diana",
+            "roles": ["Mid", "Jungle"]
+        },
+        {
+            "name": "Dr. Mundo",
+            "roles": ["Top", "Jungle"]
+        },
+        {
+            "name": "Draven",
+            "roles": ["ADC"]
+        },
+        {
+            "name": "Elise",
+            "roles": ["Top", "Jungle"],
+            "trollpicks": ["Support"]
+        },
+        {
+            "name": "Evelynn",
+            "roles": ["Jungle"],
+            "trollpicks": ["Mid"]
+        },
+        {
+            "name": "Ezreal",
+            "roles": ["ADC", "Mid"]
+        },
+        {
+            "name": "Fiddlesticks",
+            "roles": ["Jungle", "Mid", "Support"]
+        },
+        {
+            "name": "Fiora",
+            "roles": ["Top", "Jungle"]
+        },
+        {
+            "name": "Fizz",
+            "roles": ["Mid", "Jungle"]
+        },
+        {
+            "name": "Galio",
+            "roles": ["Mid", "Top", "Support"]
+        },
+        {
+            "name": "Gankplank",
+            "roles": ["Top"],
+            "trollpicks": ["Jungle"]
+        },
+        {
+            "name": "Garen",
+            "roles": ["Top"]
+        },
+        {
+            "name": "Gnar",
+            "roles": ["Top"],
+            "trollpicks": ["Jungle"]
+        },
+        {
+            "name": "Gragas",
+            "roles": ["Top", "Jungle", "Mid", "Support"]
+        },
+        {
+            "name": "Graves",
+            "roles": ["ADC"]
+        },
+        {
+            "name": "Hecarim",
+            "roles": ["Top", "Jungle"]
+        },
+        {
+            "name": "Heimerdinger",
+            "roles": ["Mid"]
+        },
+        {
+            "name": "Irelia",
+            "roles": ["Top"]
+        },
+        {
+            "name": "Janna",
+            "roles": ["Support"],
+            "trollpicks": ["Mid"]
+        },
+        {
+
+            "name": "Jarvan IV",
+            "roles": ["Top", "Jungle"]
+        },
+        {
+            "name": "Jax",
+            "roles": ["Top", "Jungle"]
+        },
+        {
+            "name": "Jayce",
+            "roles": ["Mid", "Top"]
+        },
+        {
+            "name": "Jinx",
+            "roles": ["ADC"]
+        },
+        {
+            "name": "Karma",
+            "roles": ["Mid", "Top", "Support"]
+        },
+        {
+            "name": "Karthus",
+            "roles": ["Mid"],
+            "trollpicks": ["Jungle"]
+        },
+        {
+            "name": "Kassadin",
+            "roles": ["Mid"],
+            "trollpicks": ["Top"]
+        },
+        {
+            "name": "Katarina",
+            "roles": ["Mid"]
+        },
+        {
+            "name": "Kayle",
+            "roles": ["Mid", "Top", "Support"]
+        },
+        {
+            "name": "Kennen",
+            "roles": ["Mid", "Top"],
+            "trollpicks": ["ADC"]
+        },
+        {
+            "name": "Kha'Zix",
+            "roles": ["Top", "Jungle"]
+        },
+        {
+            "name": "Kog'Maw",
+            "roles": ["ADC"],
+            "trollpicks": ["Mid"]
+        },
+        {
+            "name": "Le Blance",
+            "roles": ["Mid"],
+            "trollpicks": ["Support"]
+        },
+        {
+            "name": "Lee Sin",
+            "roles": ["Top", "Jungle"],
+            "trollpicks": ["Mid"]
+        },
+        {
+            "name": "Leona",
+            "roles": ["Support"]
+        },
+        {
+            "name": "Lissandra",
+            "roles": ["Mid", "Top"]
+        },
+        {
+            "name": "Lucian",
+            "roles": ["ADC"]
+        },
+        {
+            "name": "Lulu",
+            "roles": ["Mid", "Top", "Support"]
+        },
+        {
+            "name": "Lux",
+            "roles": ["Mid", "Support"]
+        },
+        {
+            "name": "Malphite",
+            "roles": ["Top", "Jungle"],
+            "trollpicks": ["Support"]
+        },
+        {
+            "name": "Malzahar",
+            "roles": ["Mid"]
+        },
+        {
+            "name": "Maokai",
+            "roles": ["Top", "Jungle"],
+            "trollpicks": ["Support"]
+        },
+        {
+            "name": "Master Yi",
+            "roles": ["Top", "Jungle"]
+        },
+        {
+            "name": "Miss Fortune",
+            "roles": ["ADC"]
+        },
+        {
+            "name": "Mordekaiser",
+            "roles": ["Mid"],
+            "trollpicks": ["Top"]
+        },
+        {
+            "name": "Morgana",
+            "roles": ["Mid", "Support"]
+        },
+        {
+            "name": "Nami",
+            "roles": ["Support"]
+        },
+        {
+            "name": "Nasus",
+            "roles": ["Top", "Jungle"]
+        },
+        {
+            "name": "Nautilus",
+            "roles": ["Top", "Jungle", "Support"]
+        },
+        {
+            "name": "Nidalee",
+            "roles": ["Top"],
+            "trollpicks": ["Mid", "Support"]
+        },
+        {
+            "name": "Nocturne",
+            "roles": ["Jungle"],
+            "trollpicks": ["Top"]
+        },
+        {
+            "name": "Nunu",
+            "roles": ["Top", "Jungle", "Support"]
+        },
+        {
+            "name": "Olaf",
+            "roles": ["Top", "Jungle"]
+        },
+        {
+            "name": "Orianna",
+            "roles": ["Mid"],
+            "trollpicks": ["Support"]
+        },
+        {
+            "name": "Pantheon",
+            "roles": ["Top", "Jungle"],
+            "trollpicks": ["Support"]
+        },
+        {
+            "name": "Poppy",
+            "roles": ["Top"],
+            "trollpicks": ["Jungle"]
+        },
+        {
+            "name": "Quinn",
+            "roles": ["ADC"],
+            "trollpicks": ["Top"]
+        },
+        {
+            "name": "Rammus",
+            "roles": ["Top", "Jungle"]
+        },
+        {
+            "name": "Renekton",
+            "roles": ["Top"]
+        },
+        {
+            "name": "Rengar",
+            "roles": ["Top", "Jungle"]
+        },
+        {
+            "name": "Riven",
+            "roles": ["Top"],
+            "trollpicks": ["Mid"]
+        },
+        {
+            "name": "Rumble",
+            "roles": ["Top"]
+        },
+        {
+            "name": "Ryze",
+            "roles": ["Mid", "Top"],
+            "trollpicks": ["Support"]
+        },
+        {
+            "name": "Sejuani",
+            "roles": ["Mid", "Jungle"]
+        },
+        {
+            "name": "Shaco",
+            "roles": ["Jungle"]
+        },
+        {
+            "name": "Shen",
+            "roles": ["Top"],
+            "trollpicks": ["Support"]
+        },
+        {
+            "name": "Shyvana",
+            "roles": ["Top", "Jungle"]
+        },
+        {
+            "name": "Singed",
+            "roles": ["Top"]
+        },
+        {
+            "name": "Sion",
+            "roles": ["Top", "Jungle"]
+        },
+        {
+            "name": "Sivir",
+            "roles": ["ADC"]
+        },
+        {
+            "name": "Skarner",
+            "roles": ["Jungle"]
+        },
+        {
+            "name": "Sona",
+            "roles": ["Support"],
+            "trollpicks": ["Mid"]
+        },
+        {
+            "name": "Soraka",
+            "roles": ["Support"]
+        },
+        {
+            "name": "Swain",
+            "roles": ["Mid", "Top"]
+        },
+        {
+            "name": "Syndra",
+            "roles": ["Mid"]
+        },
+        {
+            "name": "Talon",
+            "roles": ["Mid"]
+        },
+        {
+            "name": "Taric",
+            "roles": ["Support"],
+            "trollpicks": ["Jungle"]
+        },
+        {
+            "name": "Teemo",
+            "roles": ["Top"],
+            "trollpicks": ["ADC"]
+        },
+        {
+            "name": "Thresh",
+            "roles": ["Support"],
+            "trollpicks": ["ADC"]
+        },
+        {
+            "name": "Tristana",
+            "roles": ["Mid", "ADC"]
+        },
+        {
+            "name": "Trundle",
+            "roles": ["Top", "Jungle"]
+        },
+        {
+            "name": "Tryndamere",
+            "roles": ["Top", "Jungle"]
+        },
+        {
+            "name": "Twisted Fate",
+            "roles": ["Mid"],
+            "trollpicks": ["Support"]
+        },
+        {
+            "name": "Twitch",
+            "roles": ["ADC"],
+            "trollpicks": ["Jungle"]
+        },
+        {
+            "name": "Udyr",
+            "roles": ["Top", "Jungle"]
+        },
+        {
+            "name": "Urgot",
+            "roles": ["Top", "ADC"]
+        },
+        {
+            "name": "Varus",
+            "roles": ["ADC"]
+        },
+        {
+            "name": "Vayne",
+            "roles": ["ADC"],
+            "trollpicks": ["Top"]
+        },
+        {
+            "name": "Veigar",
+            "roles": ["Mid"],
+            "trollpicks": ["Support"]
+        },
+        {
+            "name": "Vel'Koz",
+            "roles": ["Mid", "Support"]
+        },
+        {
+            "name": "Vi",
+            "roles": ["Jungle"],
+            "trollpicks": ["Top"]
+        },
+        {
+            "name": "Victor",
+            "roles": ["Mid"]
+        },
+        {
+            "name": "Vladimir",
+            "roles": ["Mid", "Top"]
+        },
+        {
+            "name": "Volibear",
+            "roles": ["Top", "Jungle"],
+            "trollpicks": ["Support"]
+        },
+        {
+            "name": "Warwick",
+            "roles": ["Top", "Jungle"]
+        },
+        {
+            "name": "Wukong",
+            "roles": ["Top", "Jungle"]
+        },
+        {
+            "name": "Xerath",
+            "roles": ["Mid"]
+        },
+        {
+            "name": "Xin Zhao",
+            "roles": ["Top", "Jungle"]
+        },
+        {
+            "name": "Yasuo",
+            "roles": ["Mid", "Top"]
+        },
+        {
+            "name": "Yorick",
+            "roles": ["Top", "Jungle"]
+        },
+        {
+            "name": "Zac",
+            "roles": ["Top", "Jungle"]
+        },
+        {
+            "name": "Zed",
+            "roles": ["Mid", "Jungle", "Top"]
+        },
+        {
+            "name": "Ziggs",
+            "roles": ["Mid"]
+        },
+        {
+            "name": "Zilean",
+            "roles": ["Mid", "Support"]
+        },
+        {
+            "name": "Zyra",
+            "roles": ["Mid", "Support"]
+        }
+    ]
+}

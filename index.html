@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>The Wheel of Fortune</title>
+    <link href='http://fonts.googleapis.com/css?family=Creepster' rel='stylesheet' type='text/css'>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="js/mustache.js" type="text/javascript"></script>
+    <script src="js/main.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class="content">
+        <div class="page-header">
+            <h1 style="font-size:70px; font-family: 'Creepster';">The deadly Wheel of Fortune</h1>
+        </div>
+
+        <div class="col-xs-12 col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><a class="btn btn-toolbar" id="champListToggle" data-toggle="collapse" data-target="#champsettings">Champ-Settings <span class="glyphicon glyphicon-chevron-down"></span></a></h3>
+                </div>
+                <div class="panel-body collapse" id="champsettings">
+                    <div id="champlist" class="btn-group"></div>
+                    <div style="margin-top:10px;">
+                        <a class="btn btn-link" onclick="resetChampList()">Reset List</a>
+                        <a class="btn btn-link" onclick="loadDefaultChampData('default')">Load Default Data</a>
+                        <a class="btn btn-link" onclick="loadDefaultChampData('withtroll')">Load Default Data with Trollpicks</a>
+                        <a class="btn btn-link" onclick="loadUltimateChallenge('withtroll')">Load the ULTIMATE CHALLENGE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><a class="btn btn-toolbar" id="playerListToggle" data-toggle="collapse" data-target="#playerListCont">Player Settings <span class="glyphicon glyphicon-chevron-down"></span></a></h3>
+                </div>
+                <div class="panel-body collapse" id="playerListCont">
+                    <div class="list-group col-xs-2 col-md-2" id="playerList">
+                        <a style="text-align: center;" class="list-group-item disabled">Players</a>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="playerName">
+                            <span class="input-group-btn">
+                                <a onclick="addPlayer()" class="btn btn-default" role="button">Add Player</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><a class="btn btn-toolbar" id="roleListToggle" data-toggle="collapse" data-target="#currentRoleList">Current champs for each role <span class="glyphicon glyphicon-chevron-down"></span></a></h3>
+                </div>
+                <div class="panel-body collapse" id="currentRoleList">
+                    <div class="col-sm-3 col-md-2">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Top</h3>
+                            </div>
+                            <div class="panel-body" id="topCurrent">
+                                <ul class="roleList"></ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3 col-md-2">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Mid</h3>
+                            </div>
+                            <div class="panel-body" id="midCurrent">
+                                <ul class="roleList"></ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3 col-md-2">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Jungle</h3>
+                            </div>
+                            <div class="panel-body" id="jungCurrent">
+                                <ul class="roleList"></ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3 col-md-2">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">ADC</h3>
+                            </div>
+                            <div class="panel-body" id="adcCurrent">
+                                <ul class="roleList"></ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3 col-md-2">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Support</h3>
+                            </div>
+                            <div class="panel-body" id="supCurrent">
+                                <ul class="roleList"></ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Roll single champs for each role!</h3>
+                </div>
+                <div class="panel-body ">
+                    <div id="rollButtons" class="btn-group">
+                        <a role="button" onclick="roll('top')" class="btn btn-default">Roll Top</a>
+                        <a role="button" onclick="roll('mid')" class="btn btn-default">Roll Mid</a>
+                        <a role="button" onclick="roll('jungle')" class="btn btn-default">Roll Jungle</a>
+                        <a role="button" onclick="roll('adc')" class="btn btn-default">Roll ADC</a>
+                        <a role="button" onclick="roll('support')" class="btn btn-default">Roll Support</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Set open roles</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-default">
+                            <input type="checkbox" id="topopen"> Top
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="checkbox" id="midopen"> Mid
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="checkbox" id="jungopen"> Jungle
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="checkbox" id="adcopen"> ADC
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="checkbox" id="supopen"> Support
+                        </label>
+                    </div>
+                    <div style="margin-left:30px"  id="teamButtons" class="btn-group">
+                        <button type="button" onclick="rollTeam()" class="btn btn-default">Roll Team</button>
+                        <button type="button" onclick="rollTeamAndChamps()" class="btn btn-default">Roll Team with Champs</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-12" >
+            <div class="panel panel-default" id="ResultsCont">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Results</h3>
+                </div>
+                <div class="panel-body" id="Results">
+                    <div class="col-sm-3 col-md-2">
+                        <div class="panel panel-default" id="Top">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Top</h3>
+                            </div>
+                            <div class="panel-body" id="topResult">
+                            </div>
+                            <div class="panel-footer"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3 col-md-2">
+                        <div class="panel panel-default" id="Mid">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Mid</h3>
+                            </div>
+                            <div class="panel-body" id="midResult">
+                            </div>
+                            <div class="panel-footer"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3 col-md-2">
+                        <div class="panel panel-default" id="Jungle">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Jungle</h3>
+                            </div>
+                            <div class="panel-body" id="jungResult">
+                            </div>
+                            <div class="panel-footer"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3 col-md-2">
+                        <div class="panel panel-default" id="ADC">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">ADC</h3>
+                            </div>
+                            <div class="panel-body" id="adcResult">
+                            </div>
+                            <div class="panel-footer"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3 col-md-2">
+                        <div class="panel panel-default" id="Support">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Support</h3>
+                            </div>
+                            <div class="panel-body" id="supResult">
+                            </div>
+                            <div class="panel-footer"></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12" style="margin-top:5px;">
+                        <a class="btn btn-link" onclick="resetResults()">Reset List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script id="template" type="x-tmpl-mustache">
+        <div class="btn-group" id="{{id}}">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{champName}} <span class="caret"></span></button>
+            <ul class="dropdown-menu dropdown-menu-left" role="menu">
+                <li><a class="top">{{{top}}}Top</a></li>
+                <li><a class="mid">{{{mid}}}Mid</a></li>
+                <li><a class="jungle">{{{jungle}}}Jungle</a></li>
+                <li><a class="adc">{{{adc}}}ADC</a></li>
+                <li><a class="support">{{{support}}}Support</a></li>
+            </ul>
+        </div>
+    </script>
+
+</body>
+</html>
