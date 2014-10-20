@@ -14,6 +14,12 @@ window.onload = function () {
         loadPlayers();
         fillChampDropdowns();
     });
+
+    $('#playerName').on('keyup', function(e) {
+        if (e.which == 13) {
+            addPlayer();
+        }
+    });
 };
 
 var defaultChampData;
@@ -227,17 +233,25 @@ function addSupport(champName) {
     renderRoleLists()
 }
 
-function addPlayer(){
+function addPlayer() {
     var playerName = $("#playerName").val();
-    var entry = $("<a id='"+playerName+"' class='list-group-item'>"+playerName+"</a>");
-    entry.click(function(){
-        removePlayer($(this));
-    });
-    $("#playerList").append(entry);
+    if (playerName === "") {
+        alert("Please specify a playerName");
+        return false;
+    }else if (playerList.length === 5){
+        alert("The maximum of 5 players is already reached");
+        return false;
+    }else{
+        var entry = $("<a id='"+playerName+"' class='list-group-item'>"+playerName+"</a>");
+        entry.click(function(){
+            removePlayer($(this));
+        });
+        $("#playerList").append(entry);
 
-    playerList.push(playerName);
-    localStorage.setItem("_Players", JSON.stringify(playerList));
-    $("#playerName").val("");
+        playerList.push(playerName);
+        localStorage.setItem("_Players", JSON.stringify(playerList));
+        $("#playerName").val("");
+    }
 }
 
 function removePlayer(element){
