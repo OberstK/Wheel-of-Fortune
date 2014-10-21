@@ -1,55 +1,71 @@
 /**
  * Created by Benni on 10.10.2014.
  */
-window.onload = function () {
-    topList = [];
-    midList = [];
-    jungleList = [];
-    adcList = [];
-    supList = [];
-    playerList = [];
-    $.getJSON('data/defaultChampData.json', function(data) {
-        defaultChampData = data;
-        loadChampsIntoDB();
-        loadPlayers();
-        fillChampDropdowns();
-    });
 
-    $('#playerName').on('keyup', function(e) {
-        if (e.which == 13) {
-            addPlayer();
-        }
-    });
-};
+// window.onload is placed last. 
+// It's safer to declare every function before the onload activates.
 
-var defaultChampData;
-var topList;
-var midList;
-var jungleList;
-var adcList;
-var supList;
-var playerList;
+// I changed all for(x in List) to for(var x in List)
+// I did that because x is otherwise used in the global context of the site and 
+// could be changed at runtime of your for-loops.
+// "var x" though, is defining x as local variable.
 
+// "var" in front of every variable is nice, but not neccessary at all.
+var defaultChampData,
+    topList,
+    midList,
+    jungleList,
+    adcList,
+    supList,
+    playerList,
+    champsSelected = false;
+
+//+ Jonas Raoni Soares Silva
+//@ http://jsfromhell.com/array/shuffle [v1.0]
+function shuffleArray(o){ //v1.0
+    for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+}
+
+// This function rolls for the specified role
+// Multiple IFs are good, switch is better though.
+// Reoccuring parts could be changed into a new function
 function roll(role) {
     var champ;
-    if(role==="top"){
-        champ = topList[Math.floor((Math.random() * topList.length))];
-        $("#topResult").text(champ);
-    }else if(role === "mid"){
-        champ = midList[Math.floor((Math.random() * midList.length))];
-        $("#midResult").text(champ);
-    }else if(role === "jungle"){
-        champ = jungleList[Math.floor((Math.random() * jungleList.length))];
-        $("#jungResult").text(champ);
-    }else if(role === "adc"){
-        champ = adcList[Math.floor((Math.random() * adcList.length))];
-        $("#adcResult").text(champ);
-    }else if(role === "support"){
-        champ = supList[Math.floor((Math.random() * supList.length))];
-        $("#supResult").text(champ);
+    if(!checkRoleSelection(role)) {
+        alert("You didn't select any champ for this role.");
+        return false;
+    }
+    // It does one thing: 
+    // Reduces the amount of things to change, if you ever have to.
+    function champForRole(list) {
+        return list[Math.floor((Math.random() * list.length))];
+    }
+    switch(role) {
+        case "top":
+            champ = champForRole(topList);
+            $("#topResult").text(champ);
+            break;
+        case "mid":
+            champ = champForRole(midList);
+            $("#midResult").text(champ);
+            break;
+        case "jungle":
+            champ = champForRole(jungleList);
+            $("#jungResult").text(champ);
+            break;
+        case "adc":
+            champ = champForRole(adcList);
+            $("#adcResult").text(champ);
+            break;
+        case "support":
+            champ = champForRole(supList);
+            $("#supResult").text(champ);
+            break;
     }
 }
 
+// Pretty much fine
 function getOpenRoles(){
     var openRoles = [];
     if($("#topopen").prop('checked')){
@@ -71,75 +87,74 @@ function getOpenRoles(){
 }
 
 function rollTeam(){
-    var resultEle = $("#Results");
-    resultEle.find("div.panel-footer").text("");
-    resultEle.find("div.panel").removeClass("panel-danger").addClass("panel-default");
+    resetResults(false); // Only delete player names
 
     var openRoles = getOpenRoles();
     var rollingPlayers = playerList.slice();
 
-    for(x in openRoles){
+    for(var x in openRoles){
         if(rollingPlayers.length !== 0){
+            var openRole = openRoles[x];
             var player = rollingPlayers[Math.floor((Math.random() * rollingPlayers.length))];
-            $("#"+openRoles[x]+" div.panel-footer").text(player);
-            $("#"+openRoles[x]).removeClass("panel-default").addClass("panel-danger");
+            $("#"+openRole+" div.panel-footer").text(player);
+            $("#"+openRole).removeClass("panel-default").addClass("panel-danger");
             rollingPlayers.splice(rollingPlayers.indexOf(player),1);
         }
     }
 }
 
 function rollTeamAndChamps(){
-    resetResults();
+    resetResults(true); // Delete champ names
 
     var openRoles = getOpenRoles();
     var rollingPlayers = playerList.slice();
 
-    for(x in openRoles){
+    for(var x in openRoles){
         if(rollingPlayers.length !== 0){
+            var openRole = openRoles[x];
+            if(!checkRoleSelection(openRole.toLowerCase())) {
+                continue;
+            }
             var player = rollingPlayers[Math.floor((Math.random() * rollingPlayers.length))];
-            $("#"+openRoles[x]+" div.panel-footer").text(player);
-            $("#"+openRoles[x]).removeClass("panel-default").addClass("panel-danger");
+            $("#"+openRole+" div.panel-footer").text(player);
+            $("#"+openRole).removeClass("panel-default").addClass("panel-danger");
             rollingPlayers.splice(rollingPlayers.indexOf(player),1);
-            roll(openRoles[x].toLowerCase());
+            roll(openRole.toLowerCase());
         }
     }
 }
 
-function resetResults(){
+// You do the same thing in the function rollTeam.
+// FLAG is TRUE => Delete the champ names as well.
+function resetResults(flag){
     var resultEle = $("#Results");
     resultEle.find("div.panel-footer").text("");
-    resultEle.find("div.panel-body").text("");
+    if(flag)
+        resultEle.find("div.panel-body").text("");
     resultEle.find("div.panel").removeClass("panel-danger").addClass("panel-default");
 }
 
-//+ Jonas Raoni Soares Silva
-//@ http://jsfromhell.com/array/shuffle [v1.0]
-function shuffleArray(o){ //v1.0
-    for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-    return o;
-}
-
-
+// For security you should give every index a unique variable name.
 function renderRoleLists() {
     $("#currentRoleList ul").html("");
-    for(x in topList){
-        $("#topCurrent ul").append("<li>"+topList[x]+"</li>");
+    for(var t in topList){
+        $("#topCurrent ul").append("<li>"+topList[t]+"</li>");
     }
 
-    for(x in midList){
-        $("#midCurrent ul").append("<li>"+midList[x]+"</li>");
+    for(var m in midList){
+        $("#midCurrent ul").append("<li>"+midList[m]+"</li>");
     }
 
-    for(x in jungleList){
-        $("#jungCurrent ul").append("<li>"+jungleList[x]+"</li>");
+    for(var j in jungleList){
+        $("#jungCurrent ul").append("<li>"+jungleList[j]+"</li>");
     }
 
-    for(x in adcList){
-        $("#adcCurrent ul").append("<li>"+adcList[x]+"</li>");
+    for(var a in adcList){
+        $("#adcCurrent ul").append("<li>"+adcList[a]+"</li>");
     }
 
-    for(x in supList){
-        $("#supCurrent ul").append("<li>"+supList[x]+"</li>");
+    for(var s in supList){
+        $("#supCurrent ul").append("<li>"+supList[s]+"</li>");
     }
 }
 
@@ -176,7 +191,7 @@ function addMid(champName){
         uncheck(champName, "Mid");
     }
     setRolesOfChampInDB(roles, champName);
-    renderRoleLists()
+    renderRoleLists();
 }
 
 function addJungle(champName){
@@ -194,7 +209,7 @@ function addJungle(champName){
         uncheck(champName, "Jungle");
     }
     setRolesOfChampInDB(roles, champName);
-    renderRoleLists()
+    renderRoleLists();
 }
 
 function addADC(champName) {
@@ -212,7 +227,7 @@ function addADC(champName) {
         uncheck(champName, "ADC");
     }
     setRolesOfChampInDB(roles, champName);
-    renderRoleLists()
+    renderRoleLists();
 }
 
 function addSupport(champName) {
@@ -230,16 +245,21 @@ function addSupport(champName) {
         uncheck(champName, "Support");
     }
     setRolesOfChampInDB(roles, champName);
-    renderRoleLists()
+    renderRoleLists();
 }
 
 function addPlayer() {
-    var playerName = $("#playerName").val();
+    // As soon as you use the same selector again, 
+    // try to reduce the jQuery calls to one and save the element for later.
+    // Playerlimit's now for the check
+    var playerInput = $("#playerName")
+        playerName = playerInput.val(),
+        playerLimit = 5;
     if (playerName === "") {
         alert("Please specify a playerName");
         return false;
-    }else if (playerList.length === 5){
-        alert("The maximum of 5 players is already reached");
+    }else if (playerList.length >= playerLimit){
+        alert("The maximum of " + playerLimit + " players is already reached");
         return false;
     }else{
         var entry = $("<a id='"+playerName+"' class='list-group-item'>"+playerName+"</a>");
@@ -250,15 +270,17 @@ function addPlayer() {
 
         playerList.push(playerName);
         localStorage.setItem("_Players", JSON.stringify(playerList));
-        $("#playerName").val("");
+
+        playerInput.val("");
     }
 }
 
 function removePlayer(element){
+    // Delete the element if the operations with the playerList are finished.
     var playerName = element.text();
-    element.remove();
     playerList.splice(playerList.indexOf("playerName"),1);
     localStorage.setItem("_Players", JSON.stringify(playerList));
+    element.remove();
 }
 
 function check(champName, role){
@@ -281,17 +303,19 @@ function setRolesOfChampInDB(roles, champName) {
 }
 
 function loadChampsIntoDB(){
-    for(x in defaultChampData.champs){
-        if(localStorage.getItem(defaultChampData.champs[x].name) === undefined){
-
-            localStorage.setItem(defaultChampData.champs[x].name, JSON.stringify("[]"));
+    for(var x = -1, len = defaultChampData.champs.length; ++x < len;){
+        var name = defaultChampData.champs[x].name;
+        if(localStorage.getItem(name) === null){
+            localStorage.setItem(name, JSON.stringify("[]"));
         }
     }
 }
 
 function loadPlayers(){
+    // The entry generation could also be changed into a function.
+    // TODO: I'll let you do that, if you want. ;)
     var players = JSON.parse(localStorage.getItem("_Players"));
-    for(x in players){
+    for(var x = -1, len = players.length; ++x < len;){
         var entry = $("<a id='"+players[x]+"' class='list-group-item'>"+players[x]+"</a>");
         entry.click(function(){
             removePlayer($(this));
@@ -303,18 +327,20 @@ function loadPlayers(){
 
 function loadDefaultChampData(version) {
     resetChampList();
-    for(x in defaultChampData.champs){
+    for(var x = -1, len = defaultChampData.champs.length; ++x < len;){
         var champ = defaultChampData.champs[x];
         if(version === "default"){
             localStorage.setItem(champ.name, JSON.stringify(champ.roles));
         }else if(version === "withtroll"){
+            var roles;
             if(champ.trollpicks !== undefined){
-                var roles = champ.roles.concat(champ.trollpicks);
+                roles = champ.roles.concat(champ.trollpicks);
             }else{
                 roles = champ.roles;
             }
             localStorage.setItem(defaultChampData.champs[x].name, JSON.stringify(roles));
         }else{
+            // Dead end?
             console.log("something fizzy here");
         }
     }
@@ -322,9 +348,12 @@ function loadDefaultChampData(version) {
     renderRoleLists();
 }
 
+// Why did you call loadUltimateChallenge('withtroll') at your buttons onclick-Handler?
+// That seems like you changed your mind suddenly.
+// I'll leave that up to you.
 function loadUltimateChallenge(){
     resetChampList();
-    for(x in defaultChampData.champs){
+    for(var x = -1, len = defaultChampData.champs.length; ++x < len;){
         var champ = defaultChampData.champs[x];
         var roles = ["Top","Mid","Jungle","ADC","Support"];
         localStorage.setItem(champ.name, JSON.stringify(roles));
@@ -334,13 +363,17 @@ function loadUltimateChallenge(){
 }
 
 function resetChampList() {
-    for(x in defaultChampData.champs){
-        localStorage.setItem(defaultChampData.champs[x].name, "[]");
-        uncheck(defaultChampData.champs[x].name, "Top");
-        uncheck(defaultChampData.champs[x].name, "Mid");
-        uncheck(defaultChampData.champs[x].name, "Jungle");
-        uncheck(defaultChampData.champs[x].name, "ADC");
-        uncheck(defaultChampData.champs[x].name, "Support");
+    // I wanted to recommend you the forEach function of the Array object but apparently it's not performing well enough:
+    // http://jsperf.com/loops/183
+    // Ok, more research actually says, descending while loops are best. I'll stop thinking about the loops now.
+    for(var x = -1, len = defaultChampData.champs.length; ++x < len;){
+        var champName = defaultChampData.champs[x].name;
+        localStorage.setItem(champName, "[]");
+        uncheck(champName, "Top");
+        uncheck(champName, "Mid");
+        uncheck(champName, "Jungle");
+        uncheck(champName, "ADC");
+        uncheck(champName, "Support");
     }
     resetChampArrays();
     renderRoleLists();
@@ -356,7 +389,7 @@ function resetChampArrays(){
 
 function fillChampDropdowns () {
     var champList = defaultChampData.champs;
-    for(key in champList){
+    for(var key in champList){
         loadSingleChampDropdown(champList[key].name);
     }
     loadRoleChecks();
@@ -364,10 +397,10 @@ function fillChampDropdowns () {
 }
 
 function loadRoleChecks(){
-    for(x in defaultChampData.champs){
+    for(var x = -1, len = defaultChampData.champs.length; ++x < len;){
 
         var champName = defaultChampData.champs[x].name;
-        var roles = localStorage.getItem(defaultChampData.champs[x].name);
+        var roles = localStorage.getItem(champName);
 
         if(roles.indexOf("Top") !== -1) {
             check(champName, "Top");
@@ -426,3 +459,59 @@ function loadSingleChampDropdown(champName) {
         addSupport(champName);
     });
 }
+
+function checkRoleSelection(role) {
+    var r = false;
+    if(topList.length >= 1 && jungleList >= 1 && midList >= 1 && adcList >= 1 && supList >= 1) {
+        r = true;
+    }
+    if(role !== undefined) {
+        switch(role) {
+            case "top":
+                r = (topList.length >= 1) ? true : false; 
+                break;
+            case "mid":
+                r = (midList.length >= 1) ? true : false; 
+                break;
+            case "jungle":
+                r = (jungleList.length >= 1) ? true : false; 
+                break;
+            case "adc":
+                r = (adcList.length >= 1) ? true : false; 
+                break;
+            case "support":
+                r = (supList.length >= 1) ? true : false; 
+                break;
+        }
+    }
+    return r;
+}
+
+window.onload = function () {
+    topList = [];
+    midList = [];
+    jungleList = [];
+    adcList = [];
+    supList = [];
+    playerList = [];
+
+    // Message for the lovely browsers who aren't supporting LocalStorage
+    if(!window.localStorage) {
+        alert("Your player names will not persist over reloading, since your Browser doesn't support it.");
+    }
+
+    $.getJSON('data/defaultChampData.json', function(data) {
+        defaultChampData = data;
+        loadChampsIntoDB();
+        loadPlayers();
+        fillChampDropdowns();
+    });
+    $('#playerName').keypress(function(e) {
+        if (e.which === 13) {
+            addPlayer();
+        }
+    });
+    // "Why not $('#playerName').on('keyup', fn)?", you ask?
+    // Because you can unfocus the input while holding enter pressed.
+    // If you release it then, the input won't find out if you even released the enter key.
+};
