@@ -1,5 +1,7 @@
 /**
  * Created by Benni on 10.10.2014.
+ * 
+ * Changed by Valentinouno on 21.10.2014
  */
 
 // window.onload is placed last. 
@@ -17,8 +19,7 @@ var defaultChampData,
     jungleList,
     adcList,
     supList,
-    playerList,
-    champsSelected = false;
+    playerList;
 
 //+ Jonas Raoni Soares Silva
 //@ http://jsfromhell.com/array/shuffle [v1.0]
