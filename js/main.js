@@ -253,7 +253,7 @@ function addPlayer() {
     // As soon as you use the same selector again, 
     // try to reduce the jQuery calls to one and save the element for later.
     // Playerlimit's now for the check
-    var playerInput = $("#playerName")
+    var playerInput = $("#playerName"),
         playerName = playerInput.val(),
         playerLimit = 5;
     if (playerName === "") {
@@ -316,7 +316,7 @@ function loadPlayers(){
     // The entry generation could also be changed into a function.
     // TODO: I'll let you do that, if you want. ;)
     if(localStorage.getItem("_Players") === null){
-        localStorage.setItem("_Players", JSON.stringify([]))
+        localStorage.setItem("_Players", JSON.stringify([]));
     }
     var players = JSON.parse(localStorage.getItem("_Players"));
     for(var x = -1, len = players.length; ++x < len;){
