@@ -315,7 +315,7 @@ function loadChampsIntoDB(){
 function loadPlayers(){
     // The entry generation could also be changed into a function.
     // TODO: I'll let you do that, if you want. ;)
-    if(localStorage.getItem("_Players") === undefined){
+    if(localStorage.getItem("_Players") === null){
         localStorage.setItem("_Players", JSON.stringify("[]"))
     }
     var players = JSON.parse(localStorage.getItem("_Players"));
