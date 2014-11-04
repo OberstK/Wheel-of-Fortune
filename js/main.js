@@ -1,18 +1,9 @@
 /**
  * Created by Benni on 10.10.2014.
  * 
- * Changed by Valentinouno on 21.10.2014
+ * Changed by Valentinouno on 04.11.2014
  */
 
-// window.onload is placed last. 
-// It's safer to declare every function before the onload activates.
-
-// I changed all for(x in List) to for(var x in List)
-// I did that because x is otherwise used in the global context of the site and 
-// could be changed at runtime of your for-loops.
-// "var x" though, is defining x as local variable.
-
-// "var" in front of every variable is nice, but not neccessary at all.
 var defaultChampData,
     topList,
     midList,
@@ -28,17 +19,12 @@ function shuffleArray(o){ //v1.0
     return o;
 }
 
-// This function rolls for the specified role
-// Multiple IFs are good, switch is better though.
-// Reoccuring parts could be changed into a new function
 function roll(role) {
     var champ;
     if(!checkRoleSelection(role)) {
         alert("You didn't select any champ for this role.");
         return false;
     }
-    // It does one thing: 
-    // Reduces the amount of things to change, if you ever have to.
     function champForRole(list) {
         return list[Math.floor((Math.random() * list.length))];
     }
@@ -66,7 +52,6 @@ function roll(role) {
     }
 }
 
-// Pretty much fine
 function getOpenRoles(){
     var openRoles = [];
     if($("#topopen").prop('checked')){
@@ -85,6 +70,13 @@ function getOpenRoles(){
         openRoles.push("Support");
     }
     return shuffleArray(openRoles);
+}
+
+function preselectOpenRoles(){
+    var roleArray = ["top","mid","jung","adc","sup"];
+    for(var rIndex = 0; rIndex < roleArray.length; rIndex++) {
+        $("#"+roleArray[rIndex]+"open").prop('checked', true);
+    }
 }
 
 function rollTeam(){
@@ -125,7 +117,6 @@ function rollTeamAndChamps(){
     }
 }
 
-// You do the same thing in the function rollTeam.
 // FLAG is TRUE => Delete the champ names as well.
 function resetResults(flag){
     var resultEle = $("#Results");
@@ -135,7 +126,6 @@ function resetResults(flag){
     resultEle.find("div.panel").removeClass("panel-danger").addClass("panel-default");
 }
 
-// For security you should give every index a unique variable name.
 function renderRoleLists() {
     $("#currentRoleList ul").html("");
     for(var t in topList){
@@ -250,9 +240,6 @@ function addSupport(champName) {
 }
 
 function addPlayer() {
-    // As soon as you use the same selector again, 
-    // try to reduce the jQuery calls to one and save the element for later.
-    // Playerlimit's now for the check
     var playerInput = $("#playerName"),
         playerName = playerInput.val(),
         playerLimit = 5;
@@ -268,16 +255,13 @@ function addPlayer() {
             removePlayer($(this));
         });
         $("#playerList").append(entry);
-
         playerList.push(playerName);
         localStorage.setItem("_Players", JSON.stringify(playerList));
-
         playerInput.val("");
     }
 }
 
 function removePlayer(element){
-    // Delete the element if the operations with the playerList are finished.
     var playerName = element.text();
     playerList.splice(playerList.indexOf("playerName"),1);
     localStorage.setItem("_Players", JSON.stringify(playerList));
@@ -287,7 +271,6 @@ function removePlayer(element){
 function check(champName, role){
     var span = document.createElement("span");
     span.className = "glyphicon glyphicon-ok checkMod";
-
     var id = champName.replace(/[^a-zA-Z]/g, "");
     var element = $("#champlist #" +id+" ."+role.toLowerCase());
     element.prepend(span);
@@ -307,7 +290,8 @@ function loadChampsIntoDB(){
     for(var x = -1, len = defaultChampData.champs.length; ++x < len;){
         var name = defaultChampData.champs[x].name;
         if(localStorage.getItem(name) === null){
-            localStorage.setItem(name, JSON.stringify([]));
+            // First visit of the website loads default data in the localStorage
+            localStorage.setItem(name, JSON.stringify(defaultChampData.champs[x].roles));
         }
     }
 }
@@ -353,8 +337,7 @@ function loadDefaultChampData(version) {
 }
 
 // Why did you call loadUltimateChallenge('withtroll') at your buttons onclick-Handler?
-// That seems like you changed your mind suddenly.
-// I'll leave that up to you.
+// That seems like you changed your mind suddenly. I'll leave that up to you.
 function loadUltimateChallenge(){
     resetChampList();
     for(var x = -1, len = defaultChampData.champs.length; ++x < len;){
@@ -367,9 +350,6 @@ function loadUltimateChallenge(){
 }
 
 function resetChampList() {
-    // I wanted to recommend you the forEach function of the Array object but apparently it's not performing well enough:
-    // http://jsperf.com/loops/183
-    // Ok, more research actually says, descending while loops are best. I'll stop thinking about the loops now.
     for(var x = -1, len = defaultChampData.champs.length; ++x < len;){
         var champName = defaultChampData.champs[x].name;
         localStorage.setItem(champName, "[]");
@@ -501,13 +481,14 @@ window.onload = function () {
 
     // Message for the lovely browsers who aren't supporting LocalStorage
     if(!window.localStorage) {
-        alert("Your player names will not persist over reloading, since your Browser doesn't support it.");
+        alert("Your player names and champ settings will not persist when reloading, since your Browser doesn't support the functionality.");
     }
 
     $.getJSON('data/defaultChampData.json', function(data) {
         defaultChampData = data;
         loadChampsIntoDB();
         loadPlayers();
+        preselectOpenRoles();
         fillChampDropdowns();
     });
     $('#playerName').keypress(function(e) {
@@ -515,7 +496,4 @@ window.onload = function () {
             addPlayer();
         }
     });
-    // "Why not $('#playerName').on('keyup', fn)?", you ask?
-    // Because you can unfocus the input while holding enter pressed.
-    // If you release it then, the input won't find out if you even released the enter key.
 };
