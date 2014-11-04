@@ -55,6 +55,7 @@ function roll(role) {
 function getOpenRoles(){
     var openRoles = [];
     if($("#topopen").prop('checked')){
+        console.log("yep")
         openRoles.push("Top");
     }
     if($("#midopen").prop('checked')){
@@ -75,6 +76,7 @@ function getOpenRoles(){
 function preselectOpenRoles(){
     var roleArray = ["top","mid","jung","adc","sup"];
     for(var rIndex = 0; rIndex < roleArray.length; rIndex++) {
+        $("#"+roleArray[rIndex]+"open").prop('checked', true);
         $("#"+roleArray[rIndex]+"open").click(); // Dirty stuff, but easy.
     }
 }
@@ -83,6 +85,7 @@ function rollTeam(){
     resetResults(false); // Only delete player names
 
     var openRoles = getOpenRoles();
+    console.log(openRoles);
     var rollingPlayers = playerList.slice();
 
     for(var x in openRoles){
