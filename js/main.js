@@ -75,7 +75,7 @@ function getOpenRoles(){
 function preselectOpenRoles(){
     var roleArray = ["top","mid","jung","adc","sup"];
     for(var rIndex = 0; rIndex < roleArray.length; rIndex++) {
-        $("#"+roleArray[rIndex]+"open").prop('checked', true);
+        $("#"+roleArray[rIndex]+"open").click(); // Dirty stuff, but easy.
     }
 }
 
